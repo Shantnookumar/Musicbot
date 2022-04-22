@@ -103,7 +103,7 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     & filters.group
     & ~filters.edited
     & ~filters.forwarded
-    & ~filters.via_bot
+    & ~filters.via_bot  
 )
 async def play(_, message: Message):
     global que
@@ -345,10 +345,7 @@ async def pause(_, message: Message):
 @authorized_users_only
 async def resume(_, message: Message):
     await clientbot.pytgcalls.resume_stream(message.chat.id)
-    await message.reply_photo(
-                             photo="https://te.legra.ph/file/46cd4f9f2c43fb97299a4.jpg", 
-                             caption="**Resumed.**"
-    )
+    await message.reply("**Resumed.**")
 
 
 
@@ -379,10 +376,7 @@ async def skip(_, message: Message):
             )
 
 
-    await message.reply_photo(
-                             photo="https://te.legra.ph/file/796a9f462b25d315c9999.jpg", 
-                             caption=f'**Skipped.**'
-   ) 
+    await message.reply("**Skipped.**")
 
 
 @Client.on_message(commandpro(["/end", "end", "/stop", "stop", "x"]) & other_filters)
@@ -395,10 +389,7 @@ async def stop(_, message: Message):
         pass
 
     await clientbot.pytgcalls.leave_group_call(message.chat.id)
-    await message.reply_photo(
-                             photo="https://te.legra.ph/file/ed2098ea6257d711f3c17.jpg", 
-                             caption="**Stopped.**"
-    )
+    await message.reply("**Stoped.**")
 
 
 @Client.on_message(commandpro(["reload", "refresh"]))
